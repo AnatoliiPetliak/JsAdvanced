@@ -55,31 +55,38 @@
 
         function getNextElement() {
             restoreColor();
-            var list = document.getElementById('myLi');
-            var child = list.firstElementChild;
-            if (child == null) {
-                child.setAttribute("style", "color: #880e4f;");
-                return child;
+            var elem = document.getElementById("myLi");
+            var prev = elem.firstElementChild;
+            for (var i = 0; i < prev.length; i++) {
+                prev = prev.nextElementSibling;
+                prev.setAttribute("style", "color: #1a237e;");
             }
-            child = child.nextElementSibling;
-            if (child != null) {
-                child.setAttribute("style", "color: #1a237e;");
-            }
+            return;
         }
 
         function getPreviousElement() {
             restoreColor();
-            var list = document.getElementById('myLi');
-            var child = list.lastElementChild;
-            if (child == null) {
-                child.setAttribute("style", "color: red;");
-                return;
+            var elem = document.getElementById("myLi");
+            var prev = elem.lastElementChild;
+            for (var i = 0; i < prev.length; i++) {
+                prev = prev.previousElementSibling;
+                prev.setAttribute("style", "color: #1a237e;");
             }
-            child = child.previousElementSibling;
-            if (child != null) {
-                child.setAttribute("style", "color: green;");
-            }
+            return
         }
+        // function getNextElement() {
+        //     restoreColor();
+        //     var list = document.getElementById('myLi');
+        //     var child = list.firstElementChild;
+        //     if (child == null) {
+        //         child.setAttribute("style", "color: #880e4f;");
+        //         return child;
+        //     }
+        //     child = child.nextElementSibling;
+        //     if (child != null) {
+        //         child.setAttribute("style", "color: #1a237e;");
+        //     }
+        // }
 
         function appendItem(form) {
             if (form.input.value) {
@@ -117,7 +124,7 @@
         <input type="button" value="Add new Item on the top" onclick="prependItem(this.form)" /><br>
         <input type="button" value="Remove last Item" onclick="removeItem()" />
     </form>
-    <!-- <script src="task-list.js"></script> -->
+
 </body>
 
 </html>
