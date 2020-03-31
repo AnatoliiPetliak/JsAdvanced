@@ -1,1 +1,2 @@
-# petliakav-gmail.com
+# first task - task1.jsAavanced
+
