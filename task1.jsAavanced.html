@@ -5,11 +5,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="main.css">
 
     <style>
+        h1 {
+            text-align: center;
+        }
+        
+        p {
+            text-align: left;
+            font-size: 16pt;
+        }
+        
         li {
-            cursor: pointer
+            cursor: pointer;
+            list-style: square outside;
+            font-size: 16pt;
+            font-weight: bold;
         }
         
         input {
@@ -20,75 +31,74 @@
 </head>
 
 <body>
+    <h1>Homework</h1>
+    <p>Create a list. <br> Implement the buttons with the following functionality that allows you to modify the DOM.</p>
+
     <ul id="myLi">
         <li>Monday</li>
         <li>Tuesday</li>
         <li>Wednesday</li>
-        <li>Thursday</li>
-        <li>Friday</li>
-        <li>Saturday</li>
-        <li>Sunday</li>
     </ul>
 
     <script>
         function getFirstElement() {
+
+            setColorById();
             var firstLi = document.getElementById('myLi');
-            var child = firstLi.firstChild;
+            var child = firstLi.firstElementChild;
+            console.log(child.childNodes);
             if (child != null) {
-                child.nextSibling.setAttribute("style", "color: red;");
+                child.style.color = 'red';
             }
         }
 
         function getLastElement() {
+
+            setColorById();
             var lastLi = document.getElementById('myLi');
             var last = lastLi.lastElementChild;
             if (last != null) {
-                last.setAttribute("style", "color: red;");
+                last.style.color = 'red';
 
             }
         }
 
-        function restoreColor() {
-            document.getElementById("myLi").style.color = "#000000";
-
-        }
+        var node = null;
 
         function getNextElement() {
-            restoreColor();
-            var elem = document.getElementById("myLi");
-            var prev = elem.firstElementChild;
-            for (var i = 0; i < prev.length; i++) {
-                prev = prev.nextElementSibling;
-                prev.setAttribute("style", "color: #1a237e;");
+
+            setColorById();
+            if (node == null) {
+                var list = document.getElementById('myLi');
+                node = list.firstChild.nextSibling;
+                node.style.color = 'red';
+                return;
             }
-            return;
+            node = node.nextElementSibling;
+            if (node != null) {
+                node.style.color = 'red';
+
+            }
         }
 
         function getPreviousElement() {
-            restoreColor();
-            var elem = document.getElementById("myLi");
-            var prev = elem.lastElementChild;
-            for (var i = 0; i < prev.length; i++) {
-                prev = prev.previousElementSibling;
-                prev.setAttribute("style", "color: #1a237e;");
+
+            setColorById();
+            if (node == null) {
+                var list = document.getElementById('myLi');
+                node = list.lastChild.previousSibling;
+                console.log(node);
+                node.style.color = 'red';
+                return;
             }
-            return
+            node = node.previousElementSibling;
+            if (node != null) {
+                node.style.color = 'red';
+            }
         }
-        // function getNextElement() {
-        //     restoreColor();
-        //     var list = document.getElementById('myLi');
-        //     var child = list.firstElementChild;
-        //     if (child == null) {
-        //         child.setAttribute("style", "color: #880e4f;");
-        //         return child;
-        //     }
-        //     child = child.nextElementSibling;
-        //     if (child != null) {
-        //         child.setAttribute("style", "color: #1a237e;");
-        //     }
-        // }
 
         function appendItem(form) {
+
             if (form.input.value) {
                 var newItem = document.createElement("li");
                 newItem.innerHTML = form.input.value;
@@ -97,6 +107,7 @@
         };
 
         function prependItem(form) {
+
             if (form.input.value) {
                 var newItem = document.createElement("li");
                 newItem.innerHTML = form.input.value;
@@ -111,6 +122,14 @@
                 newItem.parentNode.removeChild(newItem);
             }
         }
+
+        function setColorById() {
+            var list = document.getElementsByTagName("LI");
+
+            for (let i = 0; i < list.length; i++) {
+                list[i].style.color = "black";
+            }
+        };
     </script>
 
     <form>
