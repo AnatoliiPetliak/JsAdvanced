@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Classwork</title>
+    <style type="text/css">
+        #one {
+            width: 100px;
+            height: 100px;
+            text-align: center;
+            border: 3px solid rgb(12, 11, 11);
+            margin-bottom: 20px;
+            display: inline-block;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="one">one</div>
+    <script>
+        // Добавьте после дива с id=one еще один див с текстом two и id=two
+        // На клик по id=two добавьте перед ним див с id - two_first, а див с id=two измените на two_second
+
+        var newDiv = document.createElement("div");
+        my_div = document.getElementById("one");
+        document.body.insertBefore(newDiv, my_div.nextSibling);
+        newDiv.innerText = 'two';
+        newDiv.id = 'two';
+        newDiv.style.cssText = 'width: 100px; height: 100px; text-align: center; border: 3px solid rgb(12, 11, 11); display: inline-block; margin-top: 10px';
+
+        newDiv.onclick = function() {
+            var newElement = document.createElement('div');
+            document.body.insertBefore(newElement, newDiv);
+            newElement.style.cssText = 'width: 100px; height: 100px; text-align: center; border: 3px solid rgb(12, 11, 11); margin: 10px 10px 0 0; display: inline-block;';
+            newElement.style.background = 'red';
+            newElement.id = 'two_first';
+            newElement.innerText = 'two-first';
+            newDiv.id = 'two_second';
+            newDiv.innerText = 'two_second';
+        };
+    </script>
+</body>
+
+</html>
