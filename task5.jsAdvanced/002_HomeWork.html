@@ -1,0 +1,62 @@
+<!-- Создайте 5 блоков с текстом. Добавьте в каждый из блоков кнопку для его удаления.
+    Используйте только один обработчик. -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+
+<body>
+
+    <div id='parentElement'></div>
+    <button id="remove">RemoveEventListener</button>
+
+    <script>
+        window.onload = function() {
+
+            function getNewContent() {
+                var result = [];
+
+                for (var i = 1; i <= 5; i++) {
+                    var div = document.createElement('div');
+                    div.prepend(i);
+                    div.style.cssText = 'margin: 10px; padding: 10px; border: solid 1px black;';
+                    div.id = "content";
+                    div.innerHTML = `${i} <button id='btn'>Hide</button> Добавьте в каждый из блоков кнопку для его удаления.`;
+                    result.push(div);
+                }
+                return result;
+            }
+            var content = document.getElementById('parentElement');
+            content.prepend(...getNewContent());
+
+            content.addEventListener("click", clickHandler);
+
+            function clickHandler(e) {
+                var target = e.target;
+                var div = target.parentElement;
+                if (target.tagName !== 'BUTTON') {
+                    return;
+                }
+                div.remove();
+            };
+
+            var removeClick = document.getElementById('remove');
+            removeClick.addEventListener("click", removeHandler);
+
+            function removeHandler() {
+                content.removeEventListener("click", clickHandler);
+            }
+
+        };
+    </script>
+
+
+</body>
+
+</html>

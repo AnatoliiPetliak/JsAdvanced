@@ -1,0 +1,43 @@
+<!-- Доработайте пример 004_Attr_Tech.html таким образом, чтобы при наведении на span элементы,
+подсказка сплыва под ними, а не в модальном окне. Используйте addEventListener  -->
+
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <script>
+        window.onload = function() {
+
+            var mainDiv = document.getElementById("main-div");
+            mainDiv.addEventListener('mouseover', onMouseHover);
+
+            function onMouseHover(e) {
+                var target = e.target;
+                var dataToggleId = target.getAttribute('data-tooltip');
+                if (dataToggleId) {
+                    var newDiv = document.createElement("div");
+                    document.body.appendChild(newDiv);
+                    newDiv.innerHTML = target.innerText;
+                }
+
+                this.onmouseout = function() {
+                    if (newDiv) {
+                        newDiv.remove();
+                        newDiv = null;
+                    }
+                }
+            };
+        };
+    </script>
+</head>
+
+<body>
+    <div id="main-div">
+        <span data-tooltip="наведите">наведите</span>
+        <span data-tooltip="для">для</span>
+        <span data-tooltip="подсказки">подсказки</span>
+    </div>
+</body>
+
+</html>

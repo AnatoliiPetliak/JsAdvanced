@@ -1,0 +1,54 @@
+<!--
+Создайте ссылку и див с текстом внутри, который изначально при загрузке страницы будет скрыт.
+При клике на ссылку див появляется, если повторно нажать ссылку див и текст должны пропасть.
+Также создайте кнопку, которая будет отменять выполнение обработчика клика по ссылке.
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <a href="#" id='pressMe'>Press me</a>
+    <div id="hidden">При клике на ссылку див появляется, если повторно нажать ссылку див и текст должны пропасть.</div>
+
+    <script>
+        window.onload = function() {
+
+            var someBtn = document.createElement('button');
+            someBtn.className = 'cancel';
+            someBtn.innerText = 'Press to cancel';
+
+            var testLink = document.getElementById('pressMe');
+            testLink.style.display = "block";
+            testLink.style.margin = "10px";
+            document.body.insertBefore(someBtn, pressMe.nextSibling);
+
+            var myHiddenText = document.getElementById('hidden');
+            myHiddenText.style.display = 'none';
+
+            testLink.addEventListener("click", clickHandler);
+
+            function clickHandler() {
+                if (myHiddenText.style.display === "none") {
+                    myHiddenText.style.display = "inline";
+                    myHiddenText.style.color = "red";
+                } else
+                    myHiddenText.style.display = "none";
+            }
+
+            someBtn.addEventListener("click", removeHandler);
+
+            function removeHandler() {
+                testLink.removeEventListener("click", clickHandler);
+            }
+        }
+    </script>
+
+</body>
+
+</html>
