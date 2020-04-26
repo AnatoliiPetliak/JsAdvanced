@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Пример проверки достоверности ввода</title>
+    <style type="text/css">
+        input.invalid {
+            background-color: rgba(185, 105, 30, 0.87);
+        }
+        
+        input.valid {
+            background-color: LightGreen;
+        }
+    </style>
+</head>
+
+<body>
+
+    <form name="form1">
+        Name:
+        <input type="text" name="userName" onchange='validateNameOnChange()' /><br /> email:
+        <input type="text" name="email" onchange='validateEmailOnChange()' /><br /> zipcode:
+        <input type="text" name="zip" onchange='validateZipOnChange()' /><br />
+        <input type="submit" onclick='submitInputData()' />
+    </form>
+
+    <script>
+        var userName = document.forms["form1"][0];
+        var email = document.forms["form1"][1];
+        var zip = document.forms["form1"][2];
+        var pattern;
+        var result;
+
+        function validateNameOnChange() {
+            var pattern = /\S/;
+            var result = pattern.test(userName.value);
+            if (result === false) {
+                userName.className = "invalid";
+                alert("Допущены ошибки при заполнении формы");
+            } else {
+                userName.className = "valid";
+            }
+        }
+
+        function validateEmailOnChange() {
+            var pattern = /\b[a-z0-9._]+@[a-z0-9.-]+\.[a-z]{2,4}\b/i;
+            var result = pattern.test(email.value);
+            if (result === false) {
+                email.className = "invalid";
+                alert("Допущены ошибки при заполнении формы");
+            } else {
+                email.className = "valid";
+            }
+
+        }
+
+        function validateZipOnChange() {
+            var pattern = /\d{5}/;
+            var result = pattern.test(zip.value);
+            if (result === false) {
+                zip.className = "invalid";
+                alert("Допущены ошибки при заполнении формы");
+            } else {
+                zip.className = "valid";
+            }
+        }
+
+        function submitInputData() {
+            if (userName.className === "valid" && email.className === "valid" && zip.className === "valid") {
+                return true;
+            } else {
+                alert("Допущены ошибки при заполнении формы");
+                e.preventDefault();
+                return false;
+            }
+        }
+    </script>
+</body>
+
+</html>

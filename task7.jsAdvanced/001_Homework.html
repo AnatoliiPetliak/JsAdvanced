@@ -1,0 +1,37 @@
+<!-- Создайте функцию, которая возвращает день недели для даты.
+День нужно возвратить в формате - понедельник имеет номер 1, вторник номер 2, …, воскресенье - номер 7. -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Homework</title>
+</head>
+
+<body> DAY:
+    <input type="number" id="day" name="day" min="1" max="31" step="1"> MONTH:
+    <input type="number" id="month" name="month" min="1" max="12" step="1"> YEAR:
+    <input type="number" id="year" name="year" min="2020" max="2020" value="2020">
+    <button id="mybutton">CHECK</button>
+    </form>
+
+    <script>
+        window.onload = function() {
+
+            function showDay() {
+                var day = document.getElementById("day").value;
+                var month = document.getElementById("month").value - 1;
+                var year = document.getElementById("year").value;
+                var date = new Date(day, month, year);
+                var days = ['SU-7', 'MO-1', 'TU-2', 'WE-3', 'TH-4', 'FR-5', 'SA-6'];
+                var res = days[date.getDay()];
+                window.alert(res);
+            }
+
+            var checkDate = document.getElementById("mybutton");
+            checkDate.addEventListener("click", showDay);
+        }
+    </script>
+</body>
+
+</html>

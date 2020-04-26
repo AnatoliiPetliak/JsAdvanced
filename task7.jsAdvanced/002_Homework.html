@@ -1,0 +1,98 @@
+<!-- Реализуйте последние 2 слайда в презентации с помощью пройденого на уроке материала -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Homework</title>
+
+</head>
+
+<body>
+
+    <script>
+        // //1st - slide
+        class Man {
+            constructor(walk, eat, drink) {
+                this.walk = walk;
+                this.eat = eat;
+                this.drink = drink;
+
+            }
+            showEction() {
+                return `${this.walk} ${this.eat} ${this.drink}`
+            }
+        }
+        class Doctor extends Man {
+            constructor(walk, eat, drink, cure) {
+                super(walk, eat, drink);
+                this.cure = cure;
+            }
+            showEction() {
+                return `${this.walk} ${this.eat} ${this.drink}, but he likes ${this.cure}`
+            }
+        }
+
+        class Soldier extends Man {
+            constructor(walk, eat, drink, shoot) {
+                super(walk, eat, drink);
+                this.shoot = shoot;
+            }
+            showEction() {
+                return `${this.walk}  ${this.eat} ${this.drink} ${this.shoot}`
+            }
+        }
+        Soldier.prototype = new Man();
+        Doctor.prototype = new Man();
+
+        var man = new Man("walk", "eat", "drink");
+        var soldier = new Soldier("quickly", "vegetables", "cola", "Shoot");
+        var doctor = new Doctor("slowly", "fruits", "whiskey", "Cure");
+
+        console.log(soldier);
+        console.log(doctor);
+        console.log(man);
+
+        //2-nd slide
+
+
+        function getDoctor(walk, eat, drink) {
+            this.walk = walk;
+            this.eat = eat;
+            this.drink = drink;
+            this.cure = function() {
+                return ("This doctor can:" + this.walk + this.eat + this.cure() + "<br />")
+            };
+
+        }
+
+        function getDentist(walk, eat, drink) {
+            this.walk = walk;
+            this.eat = eat;
+            this.drink = drink;
+            this.cure = function() {
+                return ("Treat teeth" + "<br />")
+            };
+        }
+
+        function getSurgeon(walk, eat, drink) {
+            this.walk = walk;
+            this.eat = eat;
+            this.drink = drink;
+            this.cure = function() {
+                return ("Perform operations" + "<br />")
+            };
+        }
+
+        getDentist.prototype = new getDoctor();
+        getSurgeon.prototype = new getDoctor();
+
+        var dentist = new getDentist("quickly", "vegetables", "cola", "Treat teeth");
+        var surgeon = new getSurgeon("slowly", "fruits", "whiskey", "Perform operations");
+
+        console.log(dentist);
+        console.log(surgeon);
+    </script>
+</body>
+
+</html>
