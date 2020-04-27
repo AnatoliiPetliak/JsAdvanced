@@ -1,0 +1,117 @@
+<!-- Создайте страницу которая запрашивает имя пользователя, 
+        если пользователь вводит "Admin" либо "admin" он попадает на 
+        страницу, которая оповещает его о том что " Пользоваетль Admin(не статическая строка, 
+        а данные что ввел пользователь) вошел в систему" а рядом разместите кнопку "Выход" 
+        которая вернет пользователя к модальному окну ввода логина. Реализуйте код как для 
+        куки так и для localstorage. -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Homework</title>
+    <style>
+        .div {
+            text-align: center;
+        }
+        
+        body {
+            background-color: rgb(126, 110, 99);
+        }
+        
+        .decor {
+            position: relative;
+            background-color: rgb(85, 83, 80);
+            width: 300px;
+            height: 100px;
+            display: inline-block;
+            text-align: center;
+            margin-top: 100px;
+        }
+        
+        #exitBtn {
+            position: relative;
+            display: none;
+            width: 300px;
+            color: rgb(99, 87, 87);
+            font-weight: 700;
+            text-decoration: none;
+            user-select: none;
+            padding: .5em 2em;
+            outline: none;
+            border: 3px solid;
+            border-radius: 1px;
+            transition: 0.2s;
+        }
+        
+        .main-content {
+            text-align: center;
+        }
+        
+        #prompt-form {
+            margin-top: 30px;
+        }
+        
+        .main-exit {
+            text-align: center;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <div class="main-exit">
+            <input name="cancel" id="exitBtn" type="button" value="EXIT">
+        </div>
+
+        <div class="main-content">
+            <div id="container" class="decor">
+                <form id="prompt-form">
+                    <input name="login" type="text" placeholder="Login">
+                    <input type="button" id="login" value="LOGIN" />
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function() {
+
+            window.localStorage.setItem("key1", "Admin");
+            window.localStorage.setItem("key2", "admin");
+
+            var key1 = window.localStorage.getItem('key1');
+            var key2 = window.localStorage.getItem('key2');
+
+            var hideForm = document.getElementById("container");
+            var btnCheck = document.getElementById("login");
+
+            btnCheck.addEventListener('click', function() {
+
+                var adminInputKey = document.querySelector('[name="login"]');
+                var adminValue = adminInputKey.value;
+
+                if (adminValue === key1 || adminValue === key2) {
+                    alert("Welcome " + adminValue);
+                    hideForm.style.cssText = "display: none";
+                    exitBtn.style.cssText = "display: inline-block";
+                    document.body.style.backgroundColor = "#757575";
+                } else {
+                    alert("please enter your correct login ");
+                }
+            });
+
+            var exitBtn = document.getElementById("exitBtn");
+            exitBtn.addEventListener("click", function() {
+                hideForm.style.cssText = "display: inline-block";
+                exitBtn.style.cssText = "display: none";
+                document.body.style.backgroundColor = "rgb(126, 110, 99)";
+            });
+
+        };
+    </script>
+
+</body>
+
+</html>
