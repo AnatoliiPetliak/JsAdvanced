@@ -84,11 +84,11 @@
             };
         }
 
-        getDentist.prototype = new getDoctor();
-        getSurgeon.prototype = new getDoctor();
+        Dentist.prototype = new getDoctor();
+        Surgeon.prototype = new getDoctor();
 
-        var dentist = new getDentist("quickly", "vegetables", "cola", "Treat teeth");
-        var surgeon = new getSurgeon("slowly", "fruits", "whiskey", "Perform operations");
+        var dentist = new Dentist("quickly", "vegetables", "cola", "Treat teeth");
+        var surgeon = new Surgeon("slowly", "fruits", "whiskey", "Perform operations");
 
         console.log(dentist);
         console.log(surgeon);
