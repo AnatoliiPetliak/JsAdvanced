@@ -19,11 +19,12 @@ window.onload = function() {
     //Display first 10 heroes after sucsessful fetch
 
     function displayResults(data) {
+        window.localStorage.clear();
 
         my_div = document.getElementById("person1");
 
         for (var i = 0; i <= data.results.length - 1; i++) {
-
+            window.localStorage.setItem(`${i}`, `${data.results[i].name}`);
             my_div.insertAdjacentHTML('afterbegin',
                 `<div class="3u" id="myContent">
                     <a href="#" class="bordered-feature-image">
@@ -42,10 +43,12 @@ window.onload = function() {
                         </div>
                     </div>                                                    
                 </div>`);
-
-            showHiddenContent();
+            showHiddenContent(data.results[i]);
             hideContent();
+            getTarget();
+
         }
+
     }
 
     var heroBtn = document.getElementById('heroList');
@@ -100,6 +103,7 @@ window.onload = function() {
     }
 
     function changeResults(data) {
+        window.localStorage.clear();
         my_div = document.getElementById("person1");
         var blocks = my_div.children;
         for (var i = blocks.length - 1; i >= 0; i--) {
@@ -107,7 +111,7 @@ window.onload = function() {
         };
 
         for (var i = 0; i <= data.results.length - 1; i++) {
-
+            window.localStorage.setItem(`${i}`, `${data.results[i].name}`);
             my_div.insertAdjacentHTML('afterbegin',
                 `<div class="3u" id="myContent">
                     <a href="#" class="bordered-feature-image">
@@ -129,11 +133,12 @@ window.onload = function() {
 
             showHiddenContent();
             hideContent();
+            getTarget();
+
         }
     };
 
     function showHiddenContent() {
-
         var message = document.getElementById("message");
         var showMessage = document.getElementById("show-message");
         showMessage.addEventListener("click", clickHandler);
@@ -142,7 +147,6 @@ window.onload = function() {
             if (message.style.display === "none") {
                 message.style.display = "inline-block";
                 document.body.style.overflowY = "hidden";
-
             }
         }
     }
@@ -154,8 +158,31 @@ window.onload = function() {
             if (message.style.display === "inline-block") {
                 message.style.display = "none";
                 document.body.style.overflowY = "";
-                document.html.style.overflowY = "";
             }
         });
+
+    }
+}
+
+function getTarget() {
+    var container = document.getElementById('show-message');
+
+    if (container) {
+        container.addEventListener("click", clickHandler);
+
+        function clickHandler(e) {
+            var target = e.target;
+            if (target.tagName === 'A') {
+                console.log(target.innerText);
+                for (var i = 0, len = localStorage.length; i < len; i++) {
+                    var key = localStorage.key(i);
+                    var value = localStorage[key];
+                    if (target.innerText === value) {
+                        container.style.backgroundColor = 'red';
+                    }
+                }
+            }
+
+        }
     }
 }
